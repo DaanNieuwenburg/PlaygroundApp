@@ -15,11 +15,11 @@ currentPos : Geoposition;
 places:Array<any>;
 @ViewChild('map') mapElement: ElementRef;
 locations:any;
+userposition:any;
 map: any;
 
 createMarker(place)
 {
-  //console.log(this.places);
     let marker = new google.maps.Marker({
     map: this.map,
     animation: google.maps.Animation.DROP,
@@ -46,6 +46,10 @@ getUserPosition(){
 addMap(lat,long){
 
     let latLng = new google.maps.LatLng(lat, long);
+    this.userposition = {
+      latitude: lat,
+      longtitude: long
+    }
     console.log(lat + " " + long);
     let mapOptions = {
     center: latLng,
@@ -81,7 +85,7 @@ addMarker(){
 
 }
 showPlaygrounds(){
-  this.navCtrl.push(PlaygroundsPage,{locations : this.locations});
+  this.navCtrl.push(PlaygroundsPage,{locations : this.locations, user: this.userposition});
 }
 // Add marker to the map
 addCustomMarker(location){
@@ -104,10 +108,10 @@ addCustomMarker(location){
   }
   constructor(public navCtrl: NavController,private geolocation : Geolocation) {
       this.locations = [
-           {lat: 52.060342, lng: 4.499068, content: "Speeltuin"},
-           {lat: 52.068760, lng:  4.504882, content: "Speeltuin"},
-           {lat: 52.064926, lng:  4.510925, content: "Park"},
-           {lat: 52.070786, lng: 4.509742, content: "speeltuin"}
+           {lat: 52.060342, lng: 4.499068, content: "Speeltuin", distance: 0},
+           {lat: 52.068760, lng:  4.504882, content: "Speeltuin", distance: 0},
+           {lat: 52.064926, lng:  4.510925, content: "Park", distance: 2},
+           {lat: 52.070786, lng: 4.509742, content: "speeltuin", distance: 7}
        ];
   }
 }

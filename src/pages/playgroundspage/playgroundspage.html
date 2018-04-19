@@ -15,7 +15,9 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let location of locations">{{location.content}}
+    <ion-item *ngFor="let location of locations">
+      {{location.content}}
+      <p>{{location.distance}}</p>
     </ion-item>
   </ion-list>
 </ion-content>
